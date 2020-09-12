@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block body_block %}
+    {% load staticfiles %}
+    <!-- Page Features -->
+    <div class="row text-center">
+        {% if product %}
+            <div class="container">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{{product.image.url}}"
+                    alt="{{product.name}}" width="350" height="350"/>
+                    <div class="card-body">
+                        <h4 class="card-title">{{product.name}}</h4>
+                        <p class="card-text">{{product.description}}<br/>{{product.fee}} vnđ</p>
+                    </div>
+                    <div>
+                        <form action = "{% url 'cart:cart_add' product.pk %}" method = "POST">
+                            {{cart_product_form}}
+                            {% csrf_token %}
+                            <div class = "card-footer">
+                                <input type="submit" value="Them vao gio hang" class = "btn btn-primary"
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif%}
+    </div>
+{% endblock %}
